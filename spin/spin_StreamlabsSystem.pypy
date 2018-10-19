@@ -1,0 +1,71 @@
+import sys
+import clr
+clr.AddReference("IronPython.SQLite.dll")
+clr.AddReference("IronPython.Modules.dll")
+import datetime
+import os
+import time
+
+from time import sleep
+
+#---------------------------------------
+# [Required] Script Information
+#---------------------------------------
+ScriptName = "Spin"
+Website = "https://www.twitch.tv/goldant"
+Description = "!spin will remove points from users."
+Creator = "GoldAnt"
+Version = "1.0.0.0"
+
+#---------------------------------------
+# Set Variables
+#---------------------------------------
+local_directory = "c:\\streamlabs"  # Don't change this folder
+users_file_path = local_directory + os.path.sep + 'spin_users.txt'
+count_file_path = local_directory + os.path.sep + 'spin_count.txt'
+points_to_remove = 100
+
+#---------------------------------------
+# [Required] Intialize Data (Only called on Load)
+#---------------------------------------
+def Init():
+    global ticket_count
+    ticket_count = 0
+    if not os.path.exists(local_directory):
+        os.mkdir(path=local_directory)
+    # Flush file since chatbot has restarted
+    with open(users_file_path, 'w') as f:
+        f.write('')
+        f.flush()
+    with open(count_file_path, 'w') as f:
+        f.write('')
+        f.flush()
+    return
+
+
+def Execute(data):
+    message = data.Message
+    if not message.startswith("!spin"):
+        return
+    user = data.User
+    if Parent.RemovePoints(user, points_to_remove):
+        Parent.SendStreamMessage("User {user} has spun the wheel.".format(user=user))
+        Parent.Log("spin", "User {user} has spun the wheel.".format(user=user))
+        # Add user to the file list
+        with open(users_file_path, 'a') as f:
+            f.write('{user}'.format(user=user))
+            f.flush()
+        # Increment total ticket count
+        global ticket_count
+        ticket_count += 1
+        with open(count_file_path, 'w') as f:
+            f.seek(0)
+            f.write('{count}'.format(count=ticket_count)
+            f.flush()
+    else:
+        Parent.SendStreamMessage("User {user} does not have the {points} points to spin the wheel.".format(user=user, points=points_to_remove))
+        Parent.Log('spin', "User {user} does not have the {points} points to spin the wheel.".format(user=user, points=points_to_remove))
+      
+  
+def Tick():
+  return
