@@ -3,7 +3,7 @@
   "audio_folder": {
     "type": "textbox",
     "value": "C:\\goldant\\audio",
-    "label": "Audio Folder (sounds will become commands)",
+    "label": "Audio Folder",
     "tooltip": "Where the audio files that will be turned into commands are located.",
   }
 }
