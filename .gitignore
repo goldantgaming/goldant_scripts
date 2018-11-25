@@ -3,6 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Streamlabs output files
+settings.json
+settings.js
+
+# vim swap files
+*.swp
+
 # C extensions
 *.so
 

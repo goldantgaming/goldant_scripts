@@ -1,0 +1,10 @@
+{
+  "output_file": "settings.json",
+  "audio_folder": {
+    "type": "textbox",
+    "value": "c:\goldant\audio",
+    "label": "Audio Folder",
+    "tooltip": "For example C:\audio_folder",
+    "group": "Responses"
+  }
+}
