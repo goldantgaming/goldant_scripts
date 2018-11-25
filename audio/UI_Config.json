@@ -2,9 +2,8 @@
   "output_file": "settings.json",
   "audio_folder": {
     "type": "textbox",
-    "value": "c:\goldant\audio",
-    "label": "Audio Folder",
-    "tooltip": "For example C:\audio_folder",
-    "group": "Responses"
+    "value": "C:\\goldant\\audio",
+    "label": "Audio Folder (sounds will become commands)",
+    "tooltip": "Where the audio files that will be turned into commands are located.",
   }
 }
